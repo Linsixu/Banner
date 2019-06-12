@@ -1,0 +1,59 @@
+
+ext {
+
+    //true 每个业务Module可以单独开发
+    //false 每个业务Module以lib的方式运行
+    //修改之后需要Sync方可生效
+    isModule = false
+
+    compileSdkVersion = 26
+    minSdkVersion = 15
+    targetSdkVersion = 26
+    androidSupportLibraryVersion = '26.1.0'
+
+    butterknifeVersion = '8.1.0'
+
+    versions = [
+            arouterApiVersion       : "1.4.1",
+            arouterCompilerVersion  : "1.2.2",
+            arouterannotationVersion: "1.0.4",
+            arouterRegisterVersion  : "1.0.2",
+            archLifecycleVersion    : "1.0.0",
+            archRoomVersion         : "1.0.0",
+    ]
+
+    support = [
+            'v4'                    : "com.android.support:support-v4:$androidSupportLibraryVersion",
+            'annotations'           : "com.android.support:support-annotations:$androidSupportLibraryVersion",
+            'compat'                : "com.android.support:support-compat:$androidSupportLibraryVersion",
+            'appcompat'             : "com.android.support:appcompat-v7:$androidSupportLibraryVersion",
+            'gridlayout'            : "com.android.support:gridlayout-v7:$androidSupportLibraryVersion",
+            'recyclerview'          : "com.android.support:recyclerview-v7:$androidSupportLibraryVersion",
+            'design'                : "com.android.support:design:$androidSupportLibraryVersion",
+            'cardview'              : "com.android.support:cardview-v7:$androidSupportLibraryVersion",
+            'preference'            : "com.android.support:preference-v7:$androidSupportLibraryVersion",
+            'multidex'              : 'com.android.support:multidex:1.0.3',
+            'constraintlayout'      : 'com.android.support.constraint:constraint-layout:1.0.2',
+            'exifinterface'         : "com.android.support:exifinterface:$androidSupportLibraryVersion",
+            'testrunner'            : 'com.android.support.test:runner:1.0.2',
+            'room'                  : "android.arch.persistence.room:runtime:1.0.0",
+            'core'                  : "com.android.support:support-core-utils:$androidSupportLibraryVersion",
+            'lifecycle'             : "android.arch.lifecycle:extensions:${versions["archLifecycleVersion"]}",
+            'lifecycle_compile'     : "android.arch.lifecycle:compiler:${versions["archLifecycleVersion"]}",
+            'room'                  : "android.arch.persistence.room:runtime:${versions["archRoomVersion"]}",
+            'room_compile'          : "android.arch.persistence.room:compiler:${versions["archRoomVersion"]}"
+
+    ]
+
+    third = [
+            'arouter_api'           : "com.alibaba:arouter-api:${versions["arouterApiVersion"]}",
+            'arouter_compiler'      : "com.alibaba:arouter-compiler:${versions["arouterCompilerVersion"]}",
+            'arouter_annotation'    : "com.alibaba:arouter-annotation:${versions["arouterannotationVersion"]}",
+            'arouter-register'      : "com.alibaba:arouter-register:${versions["arouterRegisterVersion"]}",
+            'butterknife'           : "com.jakewharton:butterknife:$butterknifeVersion",
+            'butterknife_compiler'  : "com.jakewharton:butterknife-compiler:$butterknifeVersion",
+            'fast_json'             : "com.alibaba:fastjson:1.1.70.android",
+            'glide'                 : "com.github.bumptech.glide:glide:4.0.0",
+            'glide_annotation'      : "com.github.bumptech.glide:compiler:4.0.0"
+    ]
+}
