@@ -25,7 +25,7 @@ import cn.magic.myself.banner2.paint.BaseBannerIndicator
  */
 open class TextAndPointIndicator : BaseBannerIndicator {
     private lateinit var mTextPaint: Paint
-    private var mOffset: Int = 0
+    //    private var mOffset: Int = 0
     private lateinit var mSelectPaint: Paint
     private lateinit var mUnSelectPaint: Paint
 
@@ -48,7 +48,7 @@ open class TextAndPointIndicator : BaseBannerIndicator {
         if (array1 != null) {
             val dp3 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3f, resources.displayMetrics).toInt()
             mTextIndicator.circleRadius = array1.getDimension(R.styleable.BaseBannerIndicator_radius, dp3.toFloat()).toInt()
-            mTextIndicator.offset = array1.getDimension(R.styleable.BaseBannerIndicator_offset, dp3.toFloat()).toInt()
+            mTextIndicator.offset = array1.getDimensionPixelSize(R.styleable.BaseBannerIndicator_offset, dp3)
             mTextIndicator.selectCircleColor = array1.getColor(R.styleable.BaseBannerIndicator_selectColorId, 0)
             mTextIndicator.unSelectCircleColor = array1.getColor(R.styleable.BaseBannerIndicator_unSelectColorId, 0)
             array1.recycle()
@@ -99,7 +99,7 @@ open class TextAndPointIndicator : BaseBannerIndicator {
         val threePointLength = mTextPaint.measureText(ELLIPSIS_STRING)
         val textWidth: Float = if (mTextIndicator.initText.isNullOrBlank()) 0f else mTextPaint.measureText(mTextIndicator.initText)
         val count = if (mRealSize == 0) mViewPager!!.adapter!!.count else mRealSize
-        result = (paddingLeft + paddingRight + count * 2 * mTextIndicator.circleRadius + (count - 1) * mOffset)
+        result = (paddingLeft + paddingRight + count * 2 * mTextIndicator.circleRadius + (count - 1) * mTextIndicator.offset)
         mTextIndicator.showText = mTextIndicator.initText
         if (result + textWidth > specSize) {
             mTextIndicator.showText = computeNewWidth(textWidth, specSize, threePointLength = threePointLength, result = result)
@@ -213,7 +213,7 @@ open class TextAndPointIndicator : BaseBannerIndicator {
     }
 
     private fun getCurrentOffsetX(current: Int, textWidth: Int, realSize: Int): Int {
-        val leftX = width - ((realSize - 1) * mOffset + (realSize) * 2 * mTextIndicator.circleRadius) - paddingRight
-        return leftX + current * (mTextIndicator.circleRadius * 2 + mOffset) + mTextIndicator.circleRadius
+        val leftX = width - ((realSize - 1) * mTextIndicator.offset + (realSize) * 2 * mTextIndicator.circleRadius) - paddingRight
+        return leftX + current * (mTextIndicator.circleRadius * 2 + mTextIndicator.offset) + mTextIndicator.circleRadius
     }
 }

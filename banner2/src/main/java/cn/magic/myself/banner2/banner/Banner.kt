@@ -16,7 +16,6 @@ import cn.magic.myself.banner2.bean.BannerTextParams
 import cn.magic.myself.banner2.inteface.IBannerItem
 import cn.magic.myself.banner2.inteface.IBannerDataCallback
 import cn.magic.myself.banner2.paint.BaseBannerIndicator
-import cn.magic.myself.banner2.paint.DefaultBannerIndicator
 import cn.magic.myself.banner2.view.RoundCircleFrameLayout
 import com.bilibili.app.comm.list.common.banner.PointBannerIndicator
 import com.bilibili.app.comm.list.common.banner.TextAndPointIndicator
