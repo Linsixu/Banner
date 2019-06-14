@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundCircleFrameLayout">
+        <attr name="isNeedAllcorner" format="boolean" />
+        <attr name="cornerAllRadius" format="dimension" />
+        <attr name="cornerTopRadius" format="dimension" />
+        <attr name="cornerButtomRadius" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="BaseBannerIndicator">
+        <attr name="radius" format="dimension" />
+        <attr name="offset" format="dimension" />
+        <attr name="selectColorId" format="color" />
+        <attr name="unSelectColorId" format="color" />
+        <attr name="layout_spacing" format="dimension|reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="Banner">
+        <attr name="innerPaddingLeft" format="dimension" />
+        <attr name="innerPaddingRight" format="dimension" />
+        <attr name="innerPaddingTop" format="dimension" />
+        <attr name="innerPaddingBottom" format="dimension" />
+        <attr name="aspectRadioWidth" format="enum" >
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="aspectRadioHeight" format="enum" >
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="textOfBannerBackground" format="reference"/>
+        <attr name="flipTime" format="integer" />
+        <attr name="indicatorType" format="enum">
+            <enum name="threePointIndicator" value="1" />
+            <enum name="textAndPointIndicator" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="TextAndPointIndicator">
+        <attr name="textSizeOfBanner" format="dimension" />
+        <attr name="textColorOfBanner" format="color" />
+    </declare-styleable>
+</resources>

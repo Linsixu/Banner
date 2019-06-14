@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BannerTheme">
+        <item name="innerPaddingLeft">12dp</item>
+        <item name="innerPaddingRight">12dp</item>
+        <item name="innerPaddingTop">12dp</item>
+        <item name="innerPaddingBottom">12dp</item>
+        <item name="flipTime">3000</item>
+        <item name="offset">4dp</item>
+        <item name="radius">6dp</item>
+    </style>
+</resources>

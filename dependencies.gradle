@@ -7,7 +7,7 @@ ext {
     isModule = false
 
     compileSdkVersion = 26
-    minSdkVersion = 15
+    minSdkVersion = 16
     targetSdkVersion = 26
     androidSupportLibraryVersion = '26.1.0'
 
@@ -37,9 +37,10 @@ ext {
             'exifinterface'         : "com.android.support:exifinterface:$androidSupportLibraryVersion",
             'testrunner'            : 'com.android.support.test:runner:1.0.2',
             'room'                  : "android.arch.persistence.room:runtime:1.0.0",
-            'core'                  : "com.android.support:support-core-utils:$androidSupportLibraryVersion",
             'lifecycle'             : "android.arch.lifecycle:extensions:${versions["archLifecycleVersion"]}",
             'lifecycle_compile'     : "android.arch.lifecycle:compiler:${versions["archLifecycleVersion"]}",
+            'livedata'              : "android.arch.lifecycle:livedata:${versions["archLifecycleVersion"]}",
+            'core'                  : "com.android.support:support-core-utils:$androidSupportLibraryVersion",
             'room'                  : "android.arch.persistence.room:runtime:${versions["archRoomVersion"]}",
             'room_compile'          : "android.arch.persistence.room:compiler:${versions["archRoomVersion"]}"
 
@@ -54,6 +55,8 @@ ext {
             'butterknife_compiler'  : "com.jakewharton:butterknife-compiler:$butterknifeVersion",
             'fast_json'             : "com.alibaba:fastjson:1.1.70.android",
             'glide'                 : "com.github.bumptech.glide:glide:4.0.0",
-            'glide_annotation'      : "com.github.bumptech.glide:compiler:4.0.0"
+            'glide_annotation'      : "com.github.bumptech.glide:compiler:4.0.0",
+            'fresco'                : "com.facebook.fresco:fresco:0.12.0",
+            'fresco_gif'            : "com.facebook.fresco:animated-gif:0.12.0",
     ]
 }
