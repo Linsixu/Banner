@@ -28,9 +28,6 @@ import java.util.concurrent.atomic.AtomicInteger
  * email: linsixudream@163.com
  */
 class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeListener {
-    val INDEX_PAGER = 0
-    val INDEX_INDICATOR = 1
-
     private lateinit var mPager: ViewPager
     private var mIndicator: BaseBannerIndicator? = null
     private var mAdapter: BannerPagerAdapter? = null
@@ -53,6 +50,9 @@ class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeL
 
         private const val CIRCLE_POINT_INDICATOR = 1
         private const val TEXT_AND_POINT_INDICATOR = 2
+
+        private const val INDEX_PAGER = 0
+        private const val INDEX_INDICATOR = 1
     }
 
     constructor(context: Context?) : super(context) {
