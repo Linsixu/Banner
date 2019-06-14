@@ -7,14 +7,10 @@ package com.bilibili.app.comm.list.common.banner
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
-import android.support.annotation.ColorRes
 import android.util.AttributeSet
 import android.util.TypedValue
 import cn.magic.myself.banner2.R
-import cn.magic.myself.banner2.banner.BannerViewModel
-import cn.magic.myself.banner2.bean.BaseIndicatorParams
 import cn.magic.myself.banner2.bean.TextIndicatorParams
 import cn.magic.myself.banner2.paint.BaseBannerIndicator
 
@@ -44,13 +40,13 @@ open class TextAndPointIndicator : BaseBannerIndicator {
             mTextIndicator.textColorId = array.getColor(R.styleable.TextAndPointIndicator_textColorOfBanner, 0)
             array.recycle()
         }
-        val array1 = context.obtainStyledAttributes(attrs, R.styleable.BaseBannerIndicator)
+        val array1 = context.obtainStyledAttributes(attrs, R.styleable.PointBannerIndicator)
         if (array1 != null) {
             val dp3 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3f, resources.displayMetrics).toInt()
-            mTextIndicator.circleRadius = array1.getDimension(R.styleable.BaseBannerIndicator_radius, dp3.toFloat()).toInt()
-            mTextIndicator.offset = array1.getDimensionPixelSize(R.styleable.BaseBannerIndicator_offset, dp3)
-            mTextIndicator.selectCircleColor = array1.getColor(R.styleable.BaseBannerIndicator_selectColorId, 0)
-            mTextIndicator.unSelectCircleColor = array1.getColor(R.styleable.BaseBannerIndicator_unSelectColorId, 0)
+            mTextIndicator.circleRadius = array1.getDimension(R.styleable.PointBannerIndicator_radius, dp3.toFloat()).toInt()
+            mTextIndicator.offset = array1.getDimensionPixelSize(R.styleable.PointBannerIndicator_offset, dp3)
+            mTextIndicator.selectCircleColor = array1.getColor(R.styleable.PointBannerIndicator_selectColorId, 0)
+            mTextIndicator.unSelectCircleColor = array1.getColor(R.styleable.PointBannerIndicator_unSelectColorId, 0)
             array1.recycle()
         }
 

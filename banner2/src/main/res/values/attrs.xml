@@ -8,7 +8,7 @@
     </declare-styleable>
 
 
-    <declare-styleable name="BaseBannerIndicator">
+    <declare-styleable name="PointBannerIndicator">
         <attr name="radius" format="dimension" />
         <attr name="offset" format="dimension" />
         <attr name="selectColorId" format="color" />

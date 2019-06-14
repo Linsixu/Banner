@@ -6,14 +6,11 @@ package com.bilibili.app.comm.list.common.banner
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.TypedValue
 import cn.magic.myself.banner2.R
-import cn.magic.myself.banner2.banner.BannerViewModel
 import cn.magic.myself.banner2.bean.BaseIndicatorParams
-import cn.magic.myself.banner2.bean.TextIndicatorParams
 import cn.magic.myself.banner2.paint.BaseBannerIndicator
 
 /**
@@ -32,14 +29,14 @@ class PointBannerIndicator : BaseBannerIndicator {
 
     override fun initData(context: Context, attrs: AttributeSet?) {
         mBaseIndicatorParams = BaseIndicatorParams()
-        val array = context.obtainStyledAttributes(attrs, R.styleable.BaseBannerIndicator)
+        val array = context.obtainStyledAttributes(attrs, R.styleable.PointBannerIndicator)
         if (array != null) {
             val dp3 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3f, resources.displayMetrics).toInt()
-            mBaseIndicatorParams.circleRadius = array.getDimension(R.styleable.BaseBannerIndicator_radius, dp3.toFloat()).toInt()
-            mBaseIndicatorParams.offset = array.getDimension(R.styleable.BaseBannerIndicator_offset, dp3.toFloat()).toInt()
-            mBaseIndicatorParams.selectCircleColor = array.getColor(R.styleable.BaseBannerIndicator_selectColorId, 0)
-            mBaseIndicatorParams.unSelectCircleColor = array.getColor(R.styleable.BaseBannerIndicator_unSelectColorId, 0)
-            mBaseIndicatorParams.circlePointGravity = array.getInt(R.styleable.BaseBannerIndicator_circlePointGravity, mBaseIndicatorParams.circlePointGravity)
+            mBaseIndicatorParams.circleRadius = array.getDimension(R.styleable.PointBannerIndicator_radius, dp3.toFloat()).toInt()
+            mBaseIndicatorParams.offset = array.getDimension(R.styleable.PointBannerIndicator_offset, dp3.toFloat()).toInt()
+            mBaseIndicatorParams.selectCircleColor = array.getColor(R.styleable.PointBannerIndicator_selectColorId, 0)
+            mBaseIndicatorParams.unSelectCircleColor = array.getColor(R.styleable.PointBannerIndicator_unSelectColorId, 0)
+            mBaseIndicatorParams.circlePointGravity = array.getInt(R.styleable.PointBannerIndicator_circlePointGravity, mBaseIndicatorParams.circlePointGravity)
             array.recycle()
         }
         mSelectPaint = Paint()

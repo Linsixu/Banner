@@ -15,7 +15,7 @@
         android:layerType="hardware"
         app:cornerAllRadius="4dp"
         app:indicatorType="textAndPointIndicator"
-        app:circlePointGravity="right"
+        app:circlePointGravity="center"
         app:isNeedAllcorner="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
