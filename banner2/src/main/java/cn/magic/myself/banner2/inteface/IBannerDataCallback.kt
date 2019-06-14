@@ -14,11 +14,5 @@ import android.support.annotation.DrawableRes
 interface IBannerDataCallback {
     fun getImageUrl(): String
 
-    //是否展示右上角的logo
-    fun isNeedShowLogo(): Boolean
-
-    @DrawableRes
-    fun getLogoDrawableRes(): Int
-
     fun getShowText(): String
 }

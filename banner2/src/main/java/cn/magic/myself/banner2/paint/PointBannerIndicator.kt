@@ -116,14 +116,14 @@ class PointBannerIndicator : BaseBannerIndicator {
             dY = yOffset
             // Only paint fill if not completely transparent
             if (mSelectPaint.alpha > 0) {
-                canvas.drawCircle(dX, dY, mBaseIndicatorParams.circleRadius.toFloat(), mSelectPaint)
+                canvas.drawCircle(dX, dY, mBaseIndicatorParams.circleRadius.toFloat(), mUnSelectPaint)
             }
         }
 
         val current = if (mRealSize == 0) mCurrentPage else mCurrentPage % mRealSize
         dX = switchGravity(current).toFloat()
         dY = yOffset
-        canvas.drawCircle(dX, dY, mBaseIndicatorParams.circleRadius.toFloat(), mUnSelectPaint)
+        canvas.drawCircle(dX, dY, mBaseIndicatorParams.circleRadius.toFloat(), mSelectPaint)
         return
     }
 

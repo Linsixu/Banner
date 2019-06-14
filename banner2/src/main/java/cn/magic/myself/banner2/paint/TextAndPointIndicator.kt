@@ -185,14 +185,14 @@ open class TextAndPointIndicator : BaseBannerIndicator {
             dY = yOffset
             // Only paint fill if not completely transparent
             if (mSelectPaint.alpha > 0) {
-                canvas.drawCircle(dX, dY, mTextIndicator.circleRadius.toFloat(), mSelectPaint)
+                canvas.drawCircle(dX, dY, mTextIndicator.circleRadius.toFloat(), mUnSelectPaint)
             }
         }
 
         val current = if (mRealSize == 0) mCurrentPage else mCurrentPage % mRealSize
         dX = getCurrentOffsetX(current, textWidth.toInt(), mRealSize).toFloat()
         dY = yOffset
-        canvas.drawCircle(dX, dY, mTextIndicator.circleRadius.toFloat(), mUnSelectPaint)
+        canvas.drawCircle(dX, dY, mTextIndicator.circleRadius.toFloat(), mSelectPaint)
     }
 
     protected fun drawText(

@@ -16,14 +16,6 @@ class ImageTextBanner(val b: BannerBean.DataBean) : BaseImageBanner(), IBannerDa
         return b.image
     }
 
-    override fun isNeedShowLogo(): Boolean {
-        return false
-    }
-
-    override fun getLogoDrawableRes(): Int {
-        return 0
-    }
-
     override fun getShowText(): String {
         return b.title
     }

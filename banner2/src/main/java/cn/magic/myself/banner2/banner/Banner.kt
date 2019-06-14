@@ -171,8 +171,7 @@ class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeL
         mPager = ViewPager(context)
         mPager.id = R.id.banner
 
-//        mPager.pageMargin = mInnerPadding
-        mPager.offscreenPageLimit = 1 //force 3 pages
+        mPager.offscreenPageLimit = 1 //强制缓存3页
         addViewInLayout(mPager, INDEX_PAGER, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
     }
 
@@ -228,11 +227,6 @@ class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeL
                 mIndicator!!.setPadding(mBannerParams.paddingLeft, mBannerParams.paddingTop, mBannerParams.paddingRight, mBannerParams.paddingBottom)
                 addViewInLayout(mIndicator, INDEX_INDICATOR, params, true)
             }
-
-//            else -> {
-//                mIndicator = DefaultBannerIndicator(context, attrs)
-//                mIndicator!!.setOnPageChangeListener(this)
-//            }
         }
         mIndicator?.let {
             it.background = mBannerParams.backGround
