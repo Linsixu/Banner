@@ -41,8 +41,6 @@ abstract class BaseBannerIndicator : View, ViewPager.OnPageChangeListener {
 
     private fun init(context: Context, attrs: AttributeSet?) {
         initData(context, attrs)
-//        mTextBanner = TextIndicatorParams()
-//        mTextBanner.isNeedThreePoint = false
     }
 
     fun setRealSize(count: Int) {

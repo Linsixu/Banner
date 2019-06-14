@@ -19,4 +19,7 @@ open class BaseIndicatorParams {
 
     //圆点间距
     var offset: Int = 0
+
+    //圆点的位置
+    var circlePointGravity: Int = 3
 }

@@ -24,31 +24,32 @@ import cn.magic.myself.banner2.paint.BaseBannerIndicator
 class PointBannerIndicator : BaseBannerIndicator {
     private lateinit var mSelectPaint: Paint
     private lateinit var mUnSelectPaint: Paint
-    private lateinit var mBaseIndicator: BaseIndicatorParams
+    private lateinit var mBaseIndicatorParams: BaseIndicatorParams
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     override fun initData(context: Context, attrs: AttributeSet?) {
-        mBaseIndicator = BaseIndicatorParams()
+        mBaseIndicatorParams = BaseIndicatorParams()
         val array = context.obtainStyledAttributes(attrs, R.styleable.BaseBannerIndicator)
         if (array != null) {
             val dp3 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3f, resources.displayMetrics).toInt()
-            mBaseIndicator.circleRadius = array.getDimension(R.styleable.BaseBannerIndicator_radius, dp3.toFloat()).toInt()
-            mBaseIndicator.offset = array.getDimension(R.styleable.BaseBannerIndicator_offset, dp3.toFloat()).toInt()
-            mBaseIndicator.selectCircleColor = array.getColor(R.styleable.BaseBannerIndicator_selectColorId, 0)
-            mBaseIndicator.unSelectCircleColor = array.getColor(R.styleable.BaseBannerIndicator_unSelectColorId, 0)
+            mBaseIndicatorParams.circleRadius = array.getDimension(R.styleable.BaseBannerIndicator_radius, dp3.toFloat()).toInt()
+            mBaseIndicatorParams.offset = array.getDimension(R.styleable.BaseBannerIndicator_offset, dp3.toFloat()).toInt()
+            mBaseIndicatorParams.selectCircleColor = array.getColor(R.styleable.BaseBannerIndicator_selectColorId, 0)
+            mBaseIndicatorParams.unSelectCircleColor = array.getColor(R.styleable.BaseBannerIndicator_unSelectColorId, 0)
+            mBaseIndicatorParams.circlePointGravity = array.getInt(R.styleable.BaseBannerIndicator_circlePointGravity, mBaseIndicatorParams.circlePointGravity)
             array.recycle()
         }
         mSelectPaint = Paint()
         mSelectPaint.style = Paint.Style.FILL
-        mSelectPaint.color = mBaseIndicator.selectCircleColor
+        mSelectPaint.color = mBaseIndicatorParams.selectCircleColor
         mSelectPaint.isAntiAlias = true
 
         mUnSelectPaint = Paint()
         mUnSelectPaint.style = Paint.Style.FILL
-        mUnSelectPaint.color = mBaseIndicator.unSelectCircleColor
+        mUnSelectPaint.color = mBaseIndicatorParams.unSelectCircleColor
         mUnSelectPaint.isAntiAlias = true
     }
 
@@ -63,7 +64,7 @@ class PointBannerIndicator : BaseBannerIndicator {
         } else {
             //Calculate the width according the views count
             val count = if (mRealSize == 0) mViewPager!!.adapter!!.count else mRealSize
-            result = (paddingLeft + paddingRight + count * 2 * mBaseIndicator.circleRadius + (count - 1) * mBaseIndicator.offset)
+            result = (paddingLeft + paddingRight + count * 2 * mBaseIndicatorParams.circleRadius + (count - 1) * mBaseIndicatorParams.offset)
             //Respect AT_MOST value if that was what is called for by measureSpec
             if (specMode == MeasureSpec.AT_MOST) {
                 result = Math.min(result, specSize)
@@ -82,7 +83,7 @@ class PointBannerIndicator : BaseBannerIndicator {
             result = specSize
         } else {
             //Measure the height
-            result = 2 * mBaseIndicator.circleRadius + paddingTop + paddingBottom
+            result = 2 * mBaseIndicatorParams.circleRadius + paddingTop + paddingBottom
             //Respect AT_MOST value if that was what is called for by measureSpec
             if (specMode == MeasureSpec.AT_MOST) {
                 result = Math.min(result, specSize)
@@ -105,28 +106,55 @@ class PointBannerIndicator : BaseBannerIndicator {
             return
         }
 
-        val yOffset = (paddingTop + mBaseIndicator.circleRadius).toFloat()
+        val yOffset = (paddingTop + mBaseIndicatorParams.circleRadius).toFloat()
 
         var dX: Float
         var dY: Float
 
         for (iLoop in 0 until mRealSize) {
-            dX = getCurrentOffsetX(iLoop).toFloat()
+            dX = switchGravity(iLoop).toFloat()
             dY = yOffset
             // Only paint fill if not completely transparent
             if (mSelectPaint.alpha > 0) {
-                canvas.drawCircle(dX, dY, mBaseIndicator.circleRadius.toFloat(), mSelectPaint)
+                canvas.drawCircle(dX, dY, mBaseIndicatorParams.circleRadius.toFloat(), mSelectPaint)
             }
         }
 
         val current = if (mRealSize == 0) mCurrentPage else mCurrentPage % mRealSize
-        dX = getCurrentOffsetX(current).toFloat()
+        dX = switchGravity(current).toFloat()
         dY = yOffset
-        canvas.drawCircle(dX, dY, mBaseIndicator.circleRadius.toFloat(), mUnSelectPaint)
+        canvas.drawCircle(dX, dY, mBaseIndicatorParams.circleRadius.toFloat(), mUnSelectPaint)
         return
     }
 
-    private fun getCurrentOffsetX(current: Int): Int {
-        return paddingLeft + current * (mBaseIndicator.circleRadius * 2 + mBaseIndicator.offset) + mBaseIndicator.circleRadius
+    private fun getLeftOffsetX(current: Int): Int {
+        return paddingLeft + current * (mBaseIndicatorParams.circleRadius * 2 + mBaseIndicatorParams.offset) + mBaseIndicatorParams.circleRadius
+    }
+
+    private fun getCenterOffsetX(current: Int): Int {
+        val circleWidth = (mBaseIndicatorParams.circleRadius * 2) * mRealSize + (mRealSize - 1) * mBaseIndicatorParams.offset
+        val actualLeft = (width - circleWidth) / 2
+        return actualLeft + current * (mBaseIndicatorParams.circleRadius * 2 + mBaseIndicatorParams.offset) + mBaseIndicatorParams.circleRadius
+    }
+
+    private fun getRightOffsetX(current: Int): Int {
+        val circleWidth = (mBaseIndicatorParams.circleRadius * 2) * mRealSize + (mRealSize - 1) * mBaseIndicatorParams.offset
+        val actualLeft = width - paddingRight - circleWidth
+        return actualLeft + current * (mBaseIndicatorParams.circleRadius * 2 + mBaseIndicatorParams.offset) + mBaseIndicatorParams.circleRadius
+    }
+
+    private fun switchGravity(current: Int): Int {
+        when (mBaseIndicatorParams.circlePointGravity) {
+            LEFT_OF_PARENT -> return getLeftOffsetX(current)
+            CENTER_OF_PARENT -> return getCenterOffsetX(current)
+            RIGHT_OF_PARENT -> return getRightOffsetX(current)
+            else -> return getRightOffsetX(current)
+        }
+    }
+
+    companion object {
+        const val LEFT_OF_PARENT = 1
+        const val CENTER_OF_PARENT = 2
+        const val RIGHT_OF_PARENT = 3
     }
 }

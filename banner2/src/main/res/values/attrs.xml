@@ -14,6 +14,11 @@
         <attr name="selectColorId" format="color" />
         <attr name="unSelectColorId" format="color" />
         <attr name="layout_spacing" format="dimension|reference" />
+        <attr name="circlePointGravity" format="enum">
+            <enum name="left" value="1" />
+            <enum name="center" value="2" />
+            <enum name="right" value="3" />
+        </attr>
     </declare-styleable>
 
 
@@ -22,15 +27,15 @@
         <attr name="innerPaddingRight" format="dimension" />
         <attr name="innerPaddingTop" format="dimension" />
         <attr name="innerPaddingBottom" format="dimension" />
-        <attr name="aspectRadioWidth" format="enum" >
+        <attr name="aspectRadioWidth" format="enum">
             <enum name="match_parent" value="-1" />
             <enum name="wrap_content" value="-2" />
         </attr>
-        <attr name="aspectRadioHeight" format="enum" >
+        <attr name="aspectRadioHeight" format="enum">
             <enum name="match_parent" value="-1" />
             <enum name="wrap_content" value="-2" />
         </attr>
-        <attr name="textOfBannerBackground" format="reference"/>
+        <attr name="textOfBannerBackground" format="reference" />
         <attr name="flipTime" format="integer" />
         <attr name="indicatorType" format="enum">
             <enum name="threePointIndicator" value="1" />

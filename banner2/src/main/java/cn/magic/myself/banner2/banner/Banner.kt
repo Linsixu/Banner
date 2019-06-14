@@ -51,7 +51,7 @@ class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeL
         private const val BANNER_START_DELAY = 1500
         private const val BANNER_FLIP_INTERVAL = 2500
 
-        private const val THREE_POINT_INDICATOR = 1
+        private const val CIRCLE_POINT_INDICATOR = 1
         private const val TEXT_AND_POINT_INDICATOR = 2
     }
 
@@ -209,7 +209,7 @@ class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeL
 
     private fun initIndicator(context: Context, attrs: AttributeSet) {
         when (mBannerParams.indicatorType) {
-            THREE_POINT_INDICATOR -> {
+            CIRCLE_POINT_INDICATOR -> {
                 mIndicator = PointBannerIndicator(context, attrs)
                 mIndicator!!.setOnPageChangeListener(this)
                 val params = LayoutParams(mBannerParams.aspectTextWidth, mBannerParams.aspectTextHeight)
