@@ -19,6 +19,8 @@ import cn.magic.myself.banner2.paint.BaseBannerIndicator
 import cn.magic.myself.banner2.view.RoundCircleFrameLayout
 import com.bilibili.app.comm.list.common.banner.PointBannerIndicator
 import com.bilibili.app.comm.list.common.banner.TextAndPointIndicator
+import java.lang.ref.SoftReference
+import java.lang.ref.WeakReference
 import java.util.ArrayList
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -282,7 +284,8 @@ class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeL
     }
 
     abstract class BaseBannerItem : IBannerItem {
-        private var mItemViewCaches: SparseArray<View>? = null
+        //        private var mItemViewCaches: SparseArray<View>? = null
+        private var mItemViewCaches: SoftReference<SparseArray<View>>? = null
 
         companion object {
             //原子操作
@@ -303,12 +306,12 @@ class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeL
 
         override fun getChildView(parentView: ViewGroup): View {
             if (mItemViewCaches == null) {
-                mItemViewCaches = SparseArray(4)
+                mItemViewCaches = SoftReference(SparseArray(4))
             }
             var mView: View? = null
 
-            for (i in 0 until mItemViewCaches!!.size()) {
-                mView = mItemViewCaches!!.get(i)
+            for (i in 0 until mItemViewCaches!!.get()!!.size()) {
+                mView = mItemViewCaches!!.getItem(i)
                 if (mView?.parent == null) {
                     //View已经不在Pager缓存机制里面，可以回收利用
                     break
@@ -325,7 +328,7 @@ class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeL
                         //为View设置id
                         it.id = getViewId()
                     }
-                    mItemViewCaches!!.put(it.id, it)
+                    mItemViewCaches!!.putItem(it.id, it)
                 }
             } else {
                 useOldView(mView)
@@ -333,6 +336,7 @@ class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeL
             return mView
         }
 
+        //onDestroy手动清理缓存，如果忘记清除最后用软引用的特性去清除，不会最后导致内存泄漏。
         fun onDestroy() {
             mItemViewCaches?.let {
                 it.clear()
@@ -342,5 +346,14 @@ class Banner : RoundCircleFrameLayout, Handler.Callback, ViewPager.OnPageChangeL
         abstract fun useOldView(itemView: View)
         abstract fun createItemView(viewGroup: ViewGroup): View
         abstract fun getLayoutId(): Int
+
+        //扩展函数，用的更舒服而言，其实可以不扩展
+        fun SoftReference<SparseArray<View>>.getItem(position: Int): View? {
+            return this.get()?.get(position)
+        }
+
+        fun SoftReference<SparseArray<View>>.putItem(key: Int, view: View?) {
+            this.get()?.put(key, view)
+        }
     }
 }
